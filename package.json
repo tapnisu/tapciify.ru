@@ -7,10 +7,15 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "deno run --allow-net --allow-read --allow-env ./dist/server/entry.mjs",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "prettier --write --plugin-search-dir=. ."
   },
   "dependencies": {
     "@astrojs/deno": "^4.3.0",
     "astro": "^2.9.7"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.0",
+    "prettier-plugin-astro": "^0.11.0"
   }
 }
