@@ -1,3 +1,3 @@
-const Converter = () => (<>oh hi</>)
+const Converter = () => <>oh hi</>;
 
-export default Converter
+export default Converter;

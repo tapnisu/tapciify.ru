@@ -1,12 +1,12 @@
 import deno from "@astrojs/deno";
-import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
+import { defineConfig } from "astro/config";
 
-import solidJs from "@astrojs/solid-js";
+import preact from "@astrojs/preact";
 
 // https://astro.build/config
 export default defineConfig({
-  output: "server",
-  adapter: deno(),
-  integrations: [tailwind(), solidJs()]
+    output: "server",
+    adapter: deno(),
+    integrations: [tailwind(), preact()],
 });
