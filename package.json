@@ -1,26 +1,28 @@
 {
-    "name": "tapciify.space",
-    "type": "module",
-    "version": "0.0.1",
-    "scripts": {
-        "dev": "astro dev",
-        "start": "astro dev",
-        "build": "astro build",
-        "preview": "deno run --allow-net --allow-read --allow-env ./dist/server/entry.mjs",
-        "astro": "astro",
-        "format": "prettier --write ."
-    },
-    "dependencies": {
-        "@astrojs/deno": "^4.3.0",
-        "@astrojs/preact": "^2.2.1",
-        "@astrojs/tailwind": "^4.0.0",
-        "astro": "^2.9.7",
-        "preact": "^10.6.5",
-        "solid-js": "^1.4.3",
-        "tailwindcss": "^3.0.24"
-    },
-    "devDependencies": {
-        "prettier": "^3.0.0",
-        "prettier-plugin-astro": "^0.11.0"
-    }
+  "name": "tapciify.space",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "deno run --allow-net --allow-read --allow-env ./dist/server/entry.mjs",
+    "astro": "astro",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@astrojs/deno": "^4.3.0",
+    "@astrojs/react": "^2.2.1",
+    "@astrojs/tailwind": "^4.0.0",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "astro": "^2.9.7",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "tailwindcss": "^3.0.24"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.0",
+    "prettier-plugin-astro": "^0.11.0"
+  }
 }
