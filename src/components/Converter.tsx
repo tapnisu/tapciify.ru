@@ -21,7 +21,7 @@ export interface ConvertResult {
 
 export default function Converter() {
   const [asciiString, setAsciiString] = useState(" .,:;+*?%S#@");
-  const [width, setWidth] = useState(0);
+  const [width, setWidth] = useState(250);
   const [height, setHeight] = useState(0);
   const [file, setFile] = useState<File>();
   const [colored, setColored] = useState(false);
@@ -39,6 +39,7 @@ export default function Converter() {
       `https://tapciify-api.shuttleapp.rs/convert/raw?width=${width}&height=${height}`,
       {
         method: "POST",
+        mode: "no-cors",
         body: formData,
       }
     )
