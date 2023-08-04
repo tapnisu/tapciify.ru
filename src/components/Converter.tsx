@@ -5,13 +5,23 @@ export default function Converter() {
   const [asciiString, setAsciiString] = useState(" .,:;+*?%S#@");
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
+  const [file, setFile] = useState<File>();
   const [colored, setColored] = useState(false);
 
   async function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
+    if (!file) return;
+
     event.preventDefault();
 
+    const formData = new FormData();
+    formData.append("blob", file, "img");
+
     const req = await fetch(
-      `https://tapciify-api.shuttleapp.rs/convert/raw?width=${width}&height=${height}`
+      `https://tapciify-api.shuttleapp.rs/convert/raw?width=${width}&height=${height}`,
+      {
+        method: "POST",
+        body: formData,
+      }
     );
     const res = await req.json();
 
@@ -23,7 +33,6 @@ export default function Converter() {
       <label>
         ASCII string:
         <TextInput
-          type="text"
           value={asciiString}
           onChange={(e) => setAsciiString(e.target.value)}
           required
@@ -37,7 +46,21 @@ export default function Converter() {
         </label>
       </label>
 
-      <input type="submit" value="Submit" />
+      <label>
+        <label>
+          Image
+          <input
+            type="image"
+            onChange={(e) =>
+              setFile(e.target.files ? e.target.files[0] : undefined)
+            }
+            required
+          />
+          <img src={file} />
+        </label>
+      </label>
+
+      <input type="submit" value="Convert" />
     </form>
   );
 }
