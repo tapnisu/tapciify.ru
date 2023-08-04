@@ -37,7 +37,7 @@ export default function Converter() {
     formData.append("blob", file, "img");
 
     const req = await fetch(
-      `https://tapciify-api.shuttleapp.rs/convert/raw?width=${width}&height=${height}&asciiString=${asciiString}&fontRatio=${fontRatio}`,
+      `https://tapciify-api.shuttleapp.rs/convert/raw?width=${width}&height=${height}&fontRatio=${fontRatio}&asciiString=${asciiString}`,
       {
         method: "POST",
         body: formData,
