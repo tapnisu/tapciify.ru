@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import TextInput from "./TextInput";
 
 export default function Converter() {
@@ -9,9 +9,9 @@ export default function Converter() {
   const [colored, setColored] = useState(false);
 
   async function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
-    if (!file) return;
-
     event.preventDefault();
+
+    if (!file) return;
 
     const formData = new FormData();
     formData.append("blob", file, "img");
@@ -29,7 +29,7 @@ export default function Converter() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="flex flex-col">
       <label>
         ASCII string:
         <TextInput
@@ -40,10 +40,8 @@ export default function Converter() {
       </label>
 
       <label>
-        <label>
-          Colored
-          <input type="checkbox" onChange={(e) => setColored(!colored)} />
-        </label>
+        <input type="checkbox" onChange={(e) => setColored(!colored)} />
+        Colored
       </label>
 
       <label>
@@ -56,7 +54,6 @@ export default function Converter() {
             }
             required
           />
-          <img src={file} />
         </label>
       </label>
 
