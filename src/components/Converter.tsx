@@ -25,7 +25,7 @@ export default function Converter() {
   const [height, setHeight] = useState(0);
   const [colored, setColored] = useState(false);
   const [asciiString, setAsciiString] = useState(" .,:;+*?%S#@");
-  const [fontRatio, setFontRatio] = useState(11.0 / 24.0);
+  const [fontRatio, setFontRatio] = useState(4);
   const [asciiArt, setAsciiArt] = useState<RawAsciiImage | undefined>();
 
   async function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
