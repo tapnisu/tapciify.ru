@@ -47,35 +47,39 @@ export default function Converter() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col">
-      <label>
-        ASCII string:
-        <TextInput
-          value={asciiString}
-          onChange={(e) => setAsciiString(e.target.value)}
-          required
-        />
-      </label>
-
-      <label>
-        <input type="checkbox" onChange={(e) => setColored(!colored)} />
-        Colored
-      </label>
-
-      <label>
+    <div>
+      <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col">
         <label>
-          Image
-          <input
-            type="file"
-            onChange={(e) =>
-              setFile(e.target.files ? e.target.files[0] : undefined)
-            }
+          ASCII string:
+          <TextInput
+            value={asciiString}
+            onChange={(e) => setAsciiString(e.target.value)}
             required
           />
         </label>
-      </label>
 
-      <input type="submit" value="Convert" />
-    </form>
+        <label>
+          <input type="checkbox" onChange={(e) => setColored(!colored)} />
+          Colored
+        </label>
+
+        <label>
+          <label>
+            Image
+            <input
+              type="file"
+              onChange={(e) =>
+                setFile(e.target.files ? e.target.files[0] : undefined)
+              }
+              required
+            />
+          </label>
+        </label>
+
+        <input type="submit" value="Convert" />
+      </form>
+
+      {asciiArt ? asciiArt.characters.join() : null}
+    </div>
   );
 }
