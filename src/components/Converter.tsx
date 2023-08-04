@@ -8,7 +8,7 @@ export default function Converter() {
   const [file, setFile] = useState<File>();
   const [colored, setColored] = useState(false);
 
-  async function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
+  function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (!file) return;
@@ -16,16 +16,15 @@ export default function Converter() {
     const formData = new FormData();
     formData.append("blob", file, "img");
 
-    const req = await fetch(
+    fetch(
       `https://tapciify-api.shuttleapp.rs/convert/raw?width=${width}&height=${height}`,
       {
         method: "POST",
         body: formData,
       }
-    );
-    const res = await req.json();
-
-    console.log(res);
+    )
+      .then((req) => req.json())
+      .then((res) => console.log(res));
   }
 
   return (
@@ -48,7 +47,7 @@ export default function Converter() {
         <label>
           Image
           <input
-            type="image"
+            type="file"
             onChange={(e) =>
               setFile(e.target.files ? e.target.files[0] : undefined)
             }
