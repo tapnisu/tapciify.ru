@@ -21,13 +21,13 @@ export interface ConvertResult {
 
 export default function Converter() {
   const [asciiString, setAsciiString] = useState(" .,:;+*?%S#@");
-  const [width, setWidth] = useState(250);
+  const [width, setWidth] = useState(64);
   const [height, setHeight] = useState(0);
   const [file, setFile] = useState<File>();
   const [colored, setColored] = useState(false);
   const [asciiArt, setAsciiArt] = useState<RawAsciiImage | undefined>();
 
-  function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (!file) return;
@@ -35,16 +35,16 @@ export default function Converter() {
     const formData = new FormData();
     formData.append("blob", file, "img");
 
-    fetch(
+    const req = await fetch(
       `https://tapciify-api.shuttleapp.rs/convert/raw?width=${width}&height=${height}`,
       {
         method: "POST",
-        mode: "no-cors",
         body: formData,
       }
-    )
-      .then((req) => req.json())
-      .then((res: ConvertResult) => console.log(setAsciiArt(res.data[0])));
+    );
+    const res: ConvertResult = await req.json();
+
+    setAsciiArt(res.data[0]);
   }
 
   return (
@@ -80,7 +80,30 @@ export default function Converter() {
         <input type="submit" value="Convert" />
       </form>
 
-      {asciiArt ? asciiArt.characters.join() : null}
+      <div className="bg-black">
+        <code>
+          {asciiArt
+            ? asciiArt.characters.map((character, key) => (
+                <span
+                  style={
+                    colored
+                      ? {
+                          color: `rgba(${character.r}, ${character.g}, ${
+                            character.b
+                          }, ${character.a / 255})`,
+                        }
+                      : undefined
+                  }
+                  key={key}
+                  className="whitespace-pre"
+                >
+                  {character.character}
+                  {(key + 1) % asciiArt.width == 0 ? <br /> : undefined}
+                </span>
+              ))
+            : undefined}
+        </code>
+      </div>
     </div>
   );
 }
