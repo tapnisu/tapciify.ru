@@ -20,11 +20,12 @@ export interface ConvertResult {
 }
 
 export default function Converter() {
-  const [asciiString, setAsciiString] = useState(" .,:;+*?%S#@");
+  const [file, setFile] = useState<File>();
   const [width, setWidth] = useState(64);
   const [height, setHeight] = useState(0);
-  const [file, setFile] = useState<File>();
   const [colored, setColored] = useState(false);
+  const [asciiString, setAsciiString] = useState(" .,:;+*?%S#@");
+  const [fontRatio, setFontRatio] = useState(11.0 / 24.0);
   const [asciiArt, setAsciiArt] = useState<RawAsciiImage | undefined>();
 
   async function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
@@ -36,7 +37,7 @@ export default function Converter() {
     formData.append("blob", file, "img");
 
     const req = await fetch(
-      `https://tapciify-api.shuttleapp.rs/convert/raw?width=${width}&height=${height}`,
+      `https://tapciify-api.shuttleapp.rs/convert/raw?width=${width}&height=${height}&asciiString=${asciiString}&fontRatio=${fontRatio}`,
       {
         method: "POST",
         body: formData,
