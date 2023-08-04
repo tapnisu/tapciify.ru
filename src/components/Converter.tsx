@@ -1,12 +1,31 @@
 import { useState } from "react";
 import TextInput from "./TextInput";
 
+export interface AsciiCharacter {
+  character: string;
+  r: number;
+  g: number;
+  b: number;
+  a: number;
+}
+
+export interface RawAsciiImage {
+  characters: AsciiCharacter[];
+  width: number;
+  heigth: number;
+}
+
+export interface ConvertResult {
+  data: RawAsciiImage[];
+}
+
 export default function Converter() {
   const [asciiString, setAsciiString] = useState(" .,:;+*?%S#@");
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
   const [file, setFile] = useState<File>();
   const [colored, setColored] = useState(false);
+  const [asciiArt, setAsciiArt] = useState<RawAsciiImage | undefined>();
 
   function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -24,7 +43,7 @@ export default function Converter() {
       }
     )
       .then((req) => req.json())
-      .then((res) => console.log(res));
+      .then((res: ConvertResult) => console.log(setAsciiArt(res.data[0])));
   }
 
   return (
