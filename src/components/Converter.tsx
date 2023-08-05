@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AsciiRenderer } from "./AsciiRenderer";
 import NumberInput from "./NumberInput";
 import TextInput from "./TextInput";
 
@@ -10,14 +11,14 @@ export interface AsciiCharacter {
   a: number;
 }
 
-export interface RawAsciiImage {
+export interface RawAsciiArt {
   characters: AsciiCharacter[];
   width: number;
   heigth: number;
 }
 
 export interface ConvertResult {
-  data: RawAsciiImage[];
+  data: RawAsciiArt[];
 }
 
 export default function Converter() {
@@ -27,7 +28,7 @@ export default function Converter() {
   const [colored, setColored] = useState(false);
   const [asciiString, setAsciiString] = useState(" .,:;+*?%S#@");
   const [fontRatio, setFontRatio] = useState(0.36);
-  const [asciiArt, setAsciiArt] = useState<RawAsciiImage | undefined>();
+  const [asciiArt, setAsciiArt] = useState<RawAsciiArt | undefined>();
 
   async function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -126,30 +127,10 @@ export default function Converter() {
         <input type="submit" value="Convert" />
       </form>
 
-      <div className="bg-black">
-        <code>
-          {asciiArt
-            ? asciiArt.characters.map((character, key) => (
-                <span
-                  style={
-                    colored
-                      ? {
-                          color: `rgba(${character.r}, ${character.g}, ${
-                            character.b
-                          }, ${character.a / 255})`,
-                        }
-                      : undefined
-                  }
-                  key={key}
-                  className="whitespace-pre"
-                >
-                  {character.character}
-                  {(key + 1) % asciiArt.width == 0 ? <br /> : undefined}
-                </span>
-              ))
-            : undefined}
-        </code>
-      </div>
+      {asciiArt ? (
+        <AsciiRenderer asciiArt={asciiArt} colored={colored} />
+      ) : undefined}
     </div>
   );
 }
+
