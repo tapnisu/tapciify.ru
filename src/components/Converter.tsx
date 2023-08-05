@@ -61,7 +61,12 @@ export default function Converter() {
         </label>
 
         <label>
-          Width: {width}
+          Width:{" "}
+          <input
+            type="number"
+            value={width}
+            onChange={(e) => setWidth(Number(e.target.value))}
+          />
           <input
             type="range"
             value={width}
@@ -72,7 +77,12 @@ export default function Converter() {
         </label>
 
         <label>
-          Height: {height}
+          Height:{" "}
+          <input
+            type="number"
+            value={height}
+            onChange={(e) => setHeight(Number(e.target.value))}
+          />
           <input
             type="range"
             value={height}
@@ -83,7 +93,12 @@ export default function Converter() {
         </label>
 
         <label>
-          Font aspect ratio: {fontRatio}
+          Font aspect ratio:{" "}
+          <input
+            type="number"
+            value={fontRatio}
+            onChange={(e) => setFontRatio(Number(e.target.value))}
+          />
           <input
             type="range"
             value={fontRatio}
