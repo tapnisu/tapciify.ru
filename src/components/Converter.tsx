@@ -1,8 +1,10 @@
-import type { RawAsciiArt, RawConvertResult } from "@lib/api";
+import { RawAsciiArt, TapciifyApi } from "@lib/api";
 import { useState } from "react";
 import { AsciiRenderer } from "./AsciiRenderer";
 import NumberInput from "./NumberInput";
 import TextInput from "./TextInput";
+
+const tapciifyApi = new TapciifyApi();
 
 export default function Converter() {
   const [file, setFile] = useState<File>();
@@ -21,16 +23,15 @@ export default function Converter() {
     const formData = new FormData();
     formData.append("blob", file, "img");
 
-    const req = await fetch(
-      `https://tapciify-api.shuttleapp.rs/convert/raw?width=${width}&height=${height}&fontRatio=${fontRatio}&asciiString=${asciiString}`,
-      {
-        method: "POST",
-        body: formData,
-      }
+    const asciiArt = await tapciifyApi.convertRaw(
+      file,
+      width,
+      height,
+      asciiString,
+      fontRatio
     );
-    const res: RawConvertResult = await req.json();
 
-    setAsciiArt(res.data[0]);
+    setAsciiArt(asciiArt.data[0]);
   }
 
   return (
