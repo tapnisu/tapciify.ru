@@ -25,7 +25,7 @@ export default function Converter() {
   const [height, setHeight] = useState(0);
   const [colored, setColored] = useState(false);
   const [asciiString, setAsciiString] = useState(" .,:;+*?%S#@");
-  const [fontRatio, setFontRatio] = useState(11.0 / 24.0);
+  const [fontRatio, setFontRatio] = useState(0.36);
   const [asciiArt, setAsciiArt] = useState<RawAsciiImage | undefined>();
 
   async function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
@@ -61,21 +61,53 @@ export default function Converter() {
         </label>
 
         <label>
+          Width: {width}
+          <input
+            type="range"
+            value={width}
+            onChange={(e) => setWidth(Number(e.target.value))}
+            min="0"
+            max="255"
+          />
+        </label>
+
+        <label>
+          Height: {height}
+          <input
+            type="range"
+            value={height}
+            onChange={(e) => setHeight(Number(e.target.value))}
+            min="0"
+            max="255"
+          />
+        </label>
+
+        <label>
+          Font aspect ratio: {fontRatio}
+          <input
+            type="range"
+            value={fontRatio}
+            onChange={(e) => setFontRatio(Number(e.target.value))}
+            min="0.2"
+            max="3"
+            step="0.01"
+          />
+        </label>
+
+        <label>
           <input type="checkbox" onChange={(e) => setColored(!colored)} />
           Colored
         </label>
 
         <label>
-          <label>
-            Image
-            <input
-              type="file"
-              onChange={(e) =>
-                setFile(e.target.files ? e.target.files[0] : undefined)
-              }
-              required
-            />
-          </label>
+          Image
+          <input
+            type="file"
+            onChange={(e) =>
+              setFile(e.target.files ? e.target.files[0] : undefined)
+            }
+            required
+          />
         </label>
 
         <input type="submit" value="Convert" />
