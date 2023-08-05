@@ -1,0 +1,77 @@
+export interface AsciiArt {
+  asciiArt: string;
+  width: number;
+  heigth: number;
+}
+
+export interface ConvertResult {
+  data: AsciiArt[];
+}
+
+export interface AsciiCharacter {
+  character: string;
+  r: number;
+  g: number;
+  b: number;
+  a: number;
+}
+
+export interface RawAsciiArt {
+  characters: AsciiCharacter[];
+  width: number;
+  heigth: number;
+}
+
+export interface RawConvertResult {
+  data: RawAsciiArt[];
+}
+
+export class TapciifyApi {
+  baseUrl = "https://tapciify-api.shuttleapp.rs";
+
+  constructor(baseUrl = "https://tapciify-api.shuttleapp.rs") {
+    this.baseUrl = baseUrl;
+  }
+
+  async convert(
+    file: File,
+    width = 0,
+    height = 0,
+    asciiString = " .,:;+*?%S#@",
+    fontRatio = 0.36
+  ): Promise<ConvertResult> {
+    const formData = new FormData();
+    formData.append("blob", file, "img");
+
+    const req = await fetch(
+      `${this.baseUrl}/convert?width=${width}&height=${height}&fontRatio=${fontRatio}&asciiString=${asciiString}`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    return await req.json();
+  }
+
+  async convertRaw(
+    file: File,
+    width = 0,
+    height = 0,
+    asciiString = " .,:;+*?%S#@",
+    fontRatio = 0.36
+  ): Promise<RawConvertResult> {
+    const formData = new FormData();
+    formData.append("blob", file, "img");
+
+    const req = await fetch(
+      `${this.baseUrl}/convert/raw?width=${width}&height=${height}&fontRatio=${fontRatio}&asciiString=${asciiString}`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    return await req.json();
+  }
+}

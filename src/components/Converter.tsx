@@ -1,25 +1,8 @@
+import type { RawAsciiArt, RawConvertResult } from "@lib/api";
 import { useState } from "react";
 import { AsciiRenderer } from "./AsciiRenderer";
 import NumberInput from "./NumberInput";
 import TextInput from "./TextInput";
-
-export interface AsciiCharacter {
-  character: string;
-  r: number;
-  g: number;
-  b: number;
-  a: number;
-}
-
-export interface RawAsciiArt {
-  characters: AsciiCharacter[];
-  width: number;
-  heigth: number;
-}
-
-export interface ConvertResult {
-  data: RawAsciiArt[];
-}
 
 export default function Converter() {
   const [file, setFile] = useState<File>();
@@ -45,7 +28,7 @@ export default function Converter() {
         body: formData,
       }
     );
-    const res: ConvertResult = await req.json();
+    const res: RawConvertResult = await req.json();
 
     setAsciiArt(res.data[0]);
   }
@@ -133,4 +116,3 @@ export default function Converter() {
     </div>
   );
 }
-

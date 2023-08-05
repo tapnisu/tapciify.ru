@@ -1,4 +1,4 @@
-import type { RawAsciiArt } from "./Converter";
+import type { RawAsciiArt } from "@lib/api";
 
 export interface AsciiRendererProps {
   asciiArt: RawAsciiArt;
