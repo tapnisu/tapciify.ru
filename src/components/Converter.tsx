@@ -1,4 +1,5 @@
 import { useState } from "react";
+import NumberInput from "./NumberInput";
 import TextInput from "./TextInput";
 
 export interface AsciiCharacter {
@@ -62,8 +63,7 @@ export default function Converter() {
 
         <label>
           Width:{" "}
-          <input
-            type="number"
+          <NumberInput
             value={width}
             onChange={(e) => setWidth(Number(e.target.value))}
           />
@@ -78,8 +78,7 @@ export default function Converter() {
 
         <label>
           Height:{" "}
-          <input
-            type="number"
+          <NumberInput
             value={height}
             onChange={(e) => setHeight(Number(e.target.value))}
           />
@@ -94,8 +93,7 @@ export default function Converter() {
 
         <label>
           Font aspect ratio:{" "}
-          <input
-            type="number"
+          <NumberInput
             value={fontRatio}
             onChange={(e) => setFontRatio(Number(e.target.value))}
           />
