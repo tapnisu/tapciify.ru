@@ -1,7 +1,11 @@
 import { RawAsciiArt, TapciifyApi } from "@lib/api";
 import { useState } from "react";
 import { AsciiRenderer } from "./AsciiRenderer";
+import CheckboxInput from "./CheckboxInput";
+import FileInput from "./FileInput";
 import NumberInput from "./NumberInput";
+import RangeInput from "./RangeInput";
+import SubmitInput from "./SubmitInput";
 import TextInput from "./TextInput";
 
 const tapciifyApi = new TapciifyApi();
@@ -67,8 +71,7 @@ export default function Converter() {
             value={height}
             onChange={(e) => setHeight(Number(e.target.value))}
           />
-          <input
-            type="range"
+          <RangeInput
             value={height}
             onChange={(e) => setHeight(Number(e.target.value))}
             min="0"
@@ -82,8 +85,7 @@ export default function Converter() {
             value={fontRatio}
             onChange={(e) => setFontRatio(Number(e.target.value))}
           />
-          <input
-            type="range"
+          <RangeInput
             value={fontRatio}
             onChange={(e) => setFontRatio(Number(e.target.value))}
             min="0.2"
@@ -93,14 +95,13 @@ export default function Converter() {
         </label>
 
         <label>
-          <input type="checkbox" onChange={(e) => setColored(!colored)} />
+          <CheckboxInput onChange={() => setColored(!colored)} />
           Colored
         </label>
 
         <label>
           Image
-          <input
-            type="file"
+          <FileInput
             onChange={(e) =>
               setFile(e.target.files ? e.target.files[0] : undefined)
             }
@@ -108,7 +109,7 @@ export default function Converter() {
           />
         </label>
 
-        <input type="submit" value="Convert" />
+        <SubmitInput value="Convert" />
       </form>
 
       {asciiArt ? (

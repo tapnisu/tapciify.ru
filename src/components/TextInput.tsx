@@ -4,6 +4,6 @@ export default function TextInput(
   props: InputHTMLAttributes<HTMLInputElement>
 ) {
   return (
-    <input type="text" className="bg-slate-900 text-slate-50" {...props} />
+    <input type="text" className="bg-slate-800 text-slate-50" {...props} />
   );
 }
