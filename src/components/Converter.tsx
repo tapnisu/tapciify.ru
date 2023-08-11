@@ -1,64 +1,68 @@
-import { RawAsciiArt, TapciifyApi } from "@lib/api";
-import { useState } from "react";
-import { AsciiRenderer } from "./AsciiRenderer";
-import CheckboxInput from "./CheckboxInput";
-import FileInput from "./FileInput";
-import NumberInput from "./NumberInput";
-import RangeInput from "./RangeInput";
-import SubmitInput from "./SubmitInput";
-import TextInput from "./TextInput";
+import { createSignal } from "solid-js";
+import { RawAsciiArt, TapciifyApi } from "../lib/api";
 
 const tapciifyApi = new TapciifyApi();
 
 export default function Converter() {
-  const [file, setFile] = useState<File>();
-  const [width, setWidth] = useState(64);
-  const [height, setHeight] = useState(0);
-  const [colored, setColored] = useState(false);
-  const [asciiString, setAsciiString] = useState(" .,:;+*?%S#@");
-  const [fontRatio, setFontRatio] = useState(0.36);
-  const [asciiArt, setAsciiArt] = useState<RawAsciiArt | undefined>();
+  const [file, setFile] = createSignal<File>();
+  const [width, setWidth] = createSignal(64);
+  const [height, setHeight] = createSignal(0);
+  const [colored, setColored] = createSignal(false);
+  const [asciiString, setAsciiString] = createSignal(" .,:;+*?%S#@");
+  const [fontRatio, setFontRatio] = createSignal(0.36);
+  const [asciiArt, setAsciiArt] = createSignal<RawAsciiArt | undefined>();
 
-  async function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
+  async function handleSubmit(
+    event: Event & {
+      submitter: HTMLElement;
+    } & {
+      currentTarget: HTMLFormElement;
+      target: Element;
+    }
+  ) {
     event.preventDefault();
 
-    if (!file) return;
+    const fileL = file();
+
+    if (!fileL) return;
 
     const formData = new FormData();
-    formData.append("blob", file, "img");
+    formData.append("blob", fileL, "img");
 
-    const asciiArt = await tapciifyApi.convertRaw(
-      file,
-      width,
-      height,
-      asciiString,
-      fontRatio
+    const res = await tapciifyApi.convertRaw(
+      fileL,
+      width(),
+      height(),
+      asciiString(),
+      fontRatio()
     );
 
-    setAsciiArt(asciiArt.data[0]);
+    setAsciiArt(res.data[0]);
   }
 
   return (
     <div>
-      <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col">
+      <form onSubmit={(e) => handleSubmit(e)} class="flex flex-col">
         <label>
-          ASCII string:
-          <TextInput
-            value={asciiString}
+          ASCII string
+          <input
+            type="text"
+            value={asciiString()}
             onChange={(e) => setAsciiString(e.target.value)}
             required
           />
         </label>
 
         <label>
-          Width:{" "}
-          <NumberInput
-            value={width}
+          Width
+          <input
+            type="number"
+            value={width()}
             onChange={(e) => setWidth(Number(e.target.value))}
           />
           <input
             type="range"
-            value={width}
+            value={width()}
             onChange={(e) => setWidth(Number(e.target.value))}
             min="0"
             max="255"
@@ -66,13 +70,15 @@ export default function Converter() {
         </label>
 
         <label>
-          Height:{" "}
-          <NumberInput
-            value={height}
+          Height
+          <input
+            type="number"
+            value={height()}
             onChange={(e) => setHeight(Number(e.target.value))}
           />
-          <RangeInput
-            value={height}
+          <input
+            type="range"
+            value={height()}
             onChange={(e) => setHeight(Number(e.target.value))}
             min="0"
             max="255"
@@ -80,13 +86,18 @@ export default function Converter() {
         </label>
 
         <label>
-          Font aspect ratio:{" "}
-          <NumberInput
-            value={fontRatio}
+          Font aspect ratio
+          <input
+            type="number"
+            value={fontRatio()}
             onChange={(e) => setFontRatio(Number(e.target.value))}
+            min="0.2"
+            max="3"
+            step="0.01"
           />
-          <RangeInput
-            value={fontRatio}
+          <input
+            type="range"
+            value={fontRatio()}
             onChange={(e) => setFontRatio(Number(e.target.value))}
             min="0.2"
             max="3"
@@ -95,13 +106,14 @@ export default function Converter() {
         </label>
 
         <label>
-          <CheckboxInput onChange={() => setColored(!colored)} />
+          <input type="checkbox" onChange={() => setColored(!colored)} />
           Colored
         </label>
 
         <label>
           Image
-          <FileInput
+          <input
+            type="file"
             onChange={(e) =>
               setFile(e.target.files ? e.target.files[0] : undefined)
             }
@@ -109,12 +121,29 @@ export default function Converter() {
           />
         </label>
 
-        <SubmitInput value="Convert" />
+        <input type="submit" value="Convert" />
       </form>
 
-      {asciiArt ? (
-        <AsciiRenderer asciiArt={asciiArt} colored={colored} />
-      ) : undefined}
+      <pre>
+        <code>
+          {asciiArt()?.characters.map((character, key) => (
+            <span
+              style={
+                colored()
+                  ? {
+                      color: `rgba(${character.r}, ${character.g}, ${
+                        character.b
+                      }, ${character.a / 255})`,
+                    }
+                  : undefined
+              }
+            >
+              {character.character}
+              {(key + 1) % asciiArt()!.width == 0 ? <br /> : undefined}
+            </span>
+          ))}
+        </code>
+      </pre>
     </div>
   );
 }
