@@ -28,12 +28,17 @@ jobs:
         with:
           node-version: lts/*
 
+      - run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
       - name: Build step
-        run: "pnpm install && pnpm run build" # 📝 Update the build command(s) if necessary
+        run: "pnpm run build"
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
           project: "tapciify"
           entrypoint: https://deno.land/std@0.167.0/http/file_server.ts
-          root: "dist" # 📝 Update the root if necessary
+          root: "dist"
