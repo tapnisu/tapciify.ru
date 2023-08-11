@@ -106,7 +106,10 @@ export default function Converter() {
         </label>
 
         <label>
-          <input type="checkbox" onChange={() => setColored(!colored)} />
+          <input
+            type="checkbox"
+            onChange={() => setColored((colored) => !colored)}
+          />
           Colored
         </label>
 
