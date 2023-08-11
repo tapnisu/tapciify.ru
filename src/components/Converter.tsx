@@ -11,6 +11,7 @@ export default function Converter() {
   const [asciiString, setAsciiString] = createSignal(" .,:;+*?%S#@");
   const [fontRatio, setFontRatio] = createSignal(0.36);
   const [asciiArt, setAsciiArt] = createSignal<RawAsciiArt | undefined>();
+  const [busy, setBusy] = createSignal(false);
 
   async function handleSubmit(
     event: Event & {
@@ -20,6 +21,8 @@ export default function Converter() {
       target: Element;
     }
   ) {
+    setBusy(true);
+
     event.preventDefault();
 
     const fileL = file();
@@ -38,10 +41,12 @@ export default function Converter() {
     );
 
     setAsciiArt(res.data[0]);
+
+    setBusy(false);
   }
 
   return (
-    <div>
+    <article>
       <form onSubmit={(e) => handleSubmit(e)} class="flex flex-col">
         <label>
           ASCII string
@@ -124,7 +129,9 @@ export default function Converter() {
           />
         </label>
 
-        <input type="submit" value="Convert" />
+        <button type="submit" aria-busy={busy()}>
+          Convert
+        </button>
       </form>
 
       <pre>
@@ -147,6 +154,6 @@ export default function Converter() {
           ))}
         </code>
       </pre>
-    </div>
+    </article>
   );
 }
