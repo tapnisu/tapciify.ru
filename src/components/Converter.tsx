@@ -49,11 +49,12 @@ export default function Converter() {
     <article>
       <form onSubmit={(e) => handleSubmit(e)} class="flex flex-col">
         <label>
-          ASCII string
+          Image
           <input
-            type="text"
-            value={asciiString()}
-            onChange={(e) => setAsciiString(e.target.value)}
+            type="file"
+            onChange={(e) =>
+              setFile(e.target.files ? e.target.files[0] : undefined)
+            }
             required
           />
         </label>
@@ -90,44 +91,46 @@ export default function Converter() {
           />
         </label>
 
-        <label>
-          Font aspect ratio
-          <input
-            type="number"
-            value={fontRatio()}
-            onChange={(e) => setFontRatio(Number(e.target.value))}
-            min="0.2"
-            max="3"
-            step="0.01"
-          />
-          <input
-            type="range"
-            value={fontRatio()}
-            onChange={(e) => setFontRatio(Number(e.target.value))}
-            min="0.2"
-            max="3"
-            step="0.01"
-          />
-        </label>
+        <details>
+          <summary>Extra</summary>
+          <label>
+            Font aspect ratio
+            <input
+              type="number"
+              value={fontRatio()}
+              onChange={(e) => setFontRatio(Number(e.target.value))}
+              min="0.2"
+              max="3"
+              step="0.01"
+            />
+            <input
+              type="range"
+              value={fontRatio()}
+              onChange={(e) => setFontRatio(Number(e.target.value))}
+              min="0.2"
+              max="3"
+              step="0.01"
+            />
+          </label>
 
-        <label>
-          <input
-            type="checkbox"
-            onChange={() => setColored((colored) => !colored)}
-          />
-          Colored
-        </label>
+          <label>
+            ASCII string
+            <input
+              type="text"
+              value={asciiString()}
+              onChange={(e) => setAsciiString(e.target.value)}
+              required
+            />
+          </label>
 
-        <label>
-          Image
-          <input
-            type="file"
-            onChange={(e) =>
-              setFile(e.target.files ? e.target.files[0] : undefined)
-            }
-            required
-          />
-        </label>
+          <label>
+            <input
+              type="checkbox"
+              onChange={() => setColored((colored) => !colored)}
+            />
+            Colored
+          </label>
+        </details>
 
         <button type="submit" aria-busy={busy()}>
           Convert
