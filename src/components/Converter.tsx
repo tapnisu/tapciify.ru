@@ -32,13 +32,16 @@ export default function Converter() {
     const formData = new FormData();
     formData.append("blob", fileL, "img");
 
-    const res = await tapciifyApi.convertRaw(
-      fileL,
-      width(),
-      height(),
-      asciiString(),
-      fontRatio()
-    );
+    const res = await tapciifyApi
+      .convertRaw(fileL, width(), height(), asciiString(), fontRatio())
+      .catch((_) => console.error(_));
+
+    if (!res) {
+      setBusy(false);
+      alert("Unknown error happened!");
+
+      return;
+    }
 
     setAsciiArt(res.data[0]);
 
