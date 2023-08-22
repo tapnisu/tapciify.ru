@@ -4,7 +4,7 @@ export default function Footer() {
       Built using <a href="https://www.solidjs.com/">Solid.js</a>,{" "}
       <a href="https://picocss.com/">Pico.css</a>, and{" "}
       <a href="https://vitejs.dev/">Vite</a> by{" "}
-      <a href="https://tapni.su/">Alexiy Rybin</a>
+      <a href="https://tapni.su/">Aleksei Rybin</a>
     </article>
   );
 }
