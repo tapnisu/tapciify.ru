@@ -4,7 +4,7 @@ export default function Nav() {
       <ul>
         <li>
           <a
-            href="https://github.com/tapciify/tapciify.space"
+            href="https://github.com/tapciify/tapciify.ru"
             class="secondary"
           >
             Github
@@ -13,7 +13,7 @@ export default function Nav() {
       </ul>
       <ul>
         <li>
-          <strong>tapciify.space</strong>
+          <strong>tapciify.ru</strong>
         </li>
       </ul>
       <ul>
