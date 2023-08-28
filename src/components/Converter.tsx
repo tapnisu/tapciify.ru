@@ -49,7 +49,7 @@ export default function Converter() {
   }
 
   return (
-    <article>
+    <article class="grid">
       <form onSubmit={(e) => handleSubmit(e)} class="flex flex-col">
         <label>
           Image
