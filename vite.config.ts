@@ -7,6 +7,8 @@ export default defineConfig({
     solid(),
     VitePWA({
       manifest: {
+        name: "Tapciify web",
+        short_name: "Tapciify",
         icons: [
           {
             src: "pwa-64x64.png",
