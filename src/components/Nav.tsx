@@ -13,7 +13,7 @@ export default function Nav() {
       </ul>
       <ul>
         <li>
-          <strong>tapciify.ru</strong>
+          <strong>Tapciify web</strong>
         </li>
       </ul>
       <ul>
