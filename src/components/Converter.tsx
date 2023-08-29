@@ -10,6 +10,7 @@ export default function Converter() {
   const [colored, setColored] = createSignal(false);
   const [asciiString, setAsciiString] = createSignal(" .,:;+*?%S#@");
   const [fontRatio, setFontRatio] = createSignal(0.36);
+  // const [reverse, setReverse] = createSignal(false);
   const [asciiArt, setAsciiArt] = createSignal<RawAsciiArt | undefined>();
   const [busy, setBusy] = createSignal(false);
 
@@ -125,6 +126,14 @@ export default function Converter() {
               required
             />
           </label>
+
+          {/* <label>
+            <input
+              type="checkbox"
+              onChange={() => setReverse((reverse) => !reverse)}
+            />
+            Reverse ASCII string
+          </label> */}
 
           <label>
             <input
