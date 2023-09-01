@@ -29,7 +29,7 @@ export interface RawConvertResult {
 export class TapciifyApi {
   baseUrl: string;
 
-  constructor(baseUrl = "https://tapciify-api.shuttleapp.rs/api/v1") {
+  constructor(baseUrl = "http://127.0.0.1:8000/api/v1") {
     this.baseUrl = baseUrl;
   }
 
@@ -44,7 +44,11 @@ export class TapciifyApi {
     formData.append("blob", file, "img");
 
     const req = await fetch(
-      `${this.baseUrl}/convert?width=${width}&height=${height}&fontRatio=${fontRatio}&asciiString=${asciiString}`,
+      `${
+        this.baseUrl
+      }/convert?width=${width}&height=${height}&fontRatio=${fontRatio}&asciiString=${encodeURIComponent(
+        asciiString
+      )}`,
       {
         method: "POST",
         body: formData,
@@ -65,9 +69,11 @@ export class TapciifyApi {
     formData.append("blob", file, "img");
 
     const req = await fetch(
-      encodeURI(
-        `${this.baseUrl}/convert/raw?width=${width}&height=${height}&fontRatio=${fontRatio}&asciiString=${asciiString}`
-      ),
+      `${
+        this.baseUrl
+      }/convert/raw?width=${width}&height=${height}&fontRatio=${fontRatio}&asciiString=${encodeURIComponent(
+        asciiString
+      )}`,
       {
         method: "POST",
         body: formData,
