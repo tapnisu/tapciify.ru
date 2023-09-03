@@ -29,7 +29,7 @@ export interface RawConvertResult {
 export class TapciifyApi {
   baseUrl: string;
 
-  constructor(baseUrl = "http://127.0.0.1:8000/api/v1") {
+  constructor(baseUrl = "https://tapciify-api.shuttleapp.rs/api/v1") {
     this.baseUrl = baseUrl;
   }
 
