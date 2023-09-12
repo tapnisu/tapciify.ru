@@ -14,7 +14,7 @@
     "solid-js": "^1.7.11"
   },
   "devDependencies": {
-    "@vite-pwa/assets-generator": "^0.0.9",
+    "@vite-pwa/assets-generator": "^0.0.10",
     "typescript": "^5.2.2",
     "vite": "^4.4.9",
     "vite-plugin-pwa": "^0.16.5",
