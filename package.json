@@ -18,6 +18,6 @@
     "typescript": "^5.2.2",
     "vite": "^4.4.11",
     "vite-plugin-pwa": "^0.16.5",
-    "vite-plugin-solid": "^2.7.0"
+    "vite-plugin-solid": "^2.7.1"
   }
 }
