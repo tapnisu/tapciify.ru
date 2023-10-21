@@ -35,7 +35,7 @@ export default function Converter() {
 
     const res = await tapciifyApi
       .convertRaw(fileL, width(), height(), asciiString(), fontRatio())
-      .catch((_) => console.error(_));
+      .catch((err) => console.error(err));
 
     if (!res) {
       setBusy(false);

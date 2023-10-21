@@ -1,13 +1,12 @@
+import { FaBrandsGithub } from "solid-icons/fa";
+
 export default function Nav() {
   return (
     <nav>
       <ul>
         <li>
-          <a
-            href="https://github.com/tapciify/tapciify.ru"
-            class="secondary"
-          >
-            Github
+          <a href="https://github.com/tapciify/tapciify.ru" class="secondary">
+            <FaBrandsGithub />
           </a>
         </li>
       </ul>
