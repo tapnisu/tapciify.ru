@@ -17,8 +17,8 @@ dependencies:
 
 devDependencies:
   '@vite-pwa/assets-generator':
-    specifier: ^0.0.10
-    version: 0.0.10
+    specifier: ^0.0.11
+    version: 0.0.11
   typescript:
     specifier: ^5.2.2
     version: 5.2.2
@@ -1642,8 +1642,8 @@ packages:
     resolution: {integrity: sha512-IDaobHimLQhjwsQ/NMwRVfa/yL7L/wriQPMhw1ZJall0KX6E1oxk29XMDeilW5qTIg5aoiqf5Udy8U/51aNoQQ==}
     dev: true
 
-  /@vite-pwa/assets-generator@0.0.10:
-    resolution: {integrity: sha512-Ya3iE0EWIV+0g0XFXIjqSU8ZnhpJeLi9/xx+VfbSyXThKjk168GUYqd1z+SOuRO03bSRFDeK8wGixtwWuedjqg==}
+  /@vite-pwa/assets-generator@0.0.11:
+    resolution: {integrity: sha512-fm2aRHYM3O8wmsOPq04g/xcmlkyvvcI+SaKbAHyrIS+gP4fEESa8/UadxMqV531QW6Xe1ECQNSxFKffmNS7yQg==}
     engines: {node: '>=16.14.0'}
     hasBin: true
     dependencies:
