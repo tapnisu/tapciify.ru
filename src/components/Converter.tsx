@@ -22,31 +22,30 @@ export default function Converter() {
       target: Element;
     }
   ) {
-    setBusy(true);
-
     event.preventDefault();
 
     const fileL = file();
+    if (!fileL) return alert("File not found!");
 
-    if (!fileL) return;
+    setBusy(true);
 
     const formData = new FormData();
     formData.append("blob", fileL, "img");
 
     const res = await tapciifyApi
-      .convertRaw(fileL, width(), height(), asciiString(), fontRatio(), reverse())
+      .convertRaw(
+        fileL,
+        width(),
+        height(),
+        asciiString(),
+        fontRatio(),
+        reverse()
+      )
       .catch((err) => console.error(err));
 
-    if (!res) {
-      setBusy(false);
-      alert("Unknown error happened!");
-
-      return;
-    }
-
-    setAsciiArt(res.data[0]);
-
     setBusy(false);
+    if (!res) return alert("Unknown error happened!");
+    setAsciiArt(res.data[0]);
   }
 
   return (
