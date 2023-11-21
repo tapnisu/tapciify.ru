@@ -55,6 +55,8 @@ export default function Converter() {
           Image
           <input
             type="file"
+            multiple
+            accept="image/*"
             onChange={(e) =>
               setFile(e.target.files ? e.target.files[0] : undefined)
             }
