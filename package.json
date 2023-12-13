@@ -17,7 +17,7 @@
   "devDependencies": {
     "@vite-pwa/assets-generator": "^0.2.1",
     "typescript": "^5.3.3",
-    "vite": "^5.0.7",
+    "vite": "^5.0.8",
     "vite-plugin-pwa": "^0.17.4",
     "vite-plugin-solid": "^2.8.0"
   }
