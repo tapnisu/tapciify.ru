@@ -5,13 +5,19 @@ const tapciifyApi = new TapciifyApi();
 
 export default function Converter() {
   const [file, setFile] = createSignal<File>();
+
   const [width, setWidth] = createSignal(64);
   const [height, setHeight] = createSignal(0);
-  const [colored, setColored] = createSignal(false);
-  const [asciiString, setAsciiString] = createSignal(" .,:;+*?%S#@");
+
   const [fontRatio, setFontRatio] = createSignal(0.36);
+  const [asciiString, setAsciiString] = createSignal(" .,:;+*?%S#@");
+
   const [reverse, setReverse] = createSignal(false);
+  const [colored, setColored] = createSignal(false);
+  const [pixels, setPixels] = createSignal(false);
+
   const [asciiArt, setAsciiArt] = createSignal<RawAsciiArt | undefined>();
+
   const [busy, setBusy] = createSignal(false);
 
   async function handleSubmit(
@@ -37,9 +43,9 @@ export default function Converter() {
         fileL,
         width(),
         height(),
-        asciiString(),
-        fontRatio(),
-        reverse()
+        pixels() ? "█" : asciiString(),
+        pixels() ? 1 : fontRatio(),
+        pixels() ? false : reverse()
       )
       .catch((err) => console.error(err));
 
@@ -49,7 +55,51 @@ export default function Converter() {
   }
 
   return (
-    <article class="grid">
+    <article>
+      <pre
+        style={
+          pixels()
+            ? {
+                display: "grid",
+                "grid-template-columns": `repeat(${asciiArt()?.width}, 1fr)`,
+                "grid-auto-rows": "min-content",
+              }
+            : undefined
+        }
+      >
+        {!pixels() ? (
+          <code>
+            {asciiArt()?.characters.map((character, key) => (
+              <span
+                style={
+                  colored()
+                    ? {
+                        color: `rgba(${character.r}, ${character.g}, ${
+                          character.b
+                        }, ${character.a / 255})`,
+                      }
+                    : undefined
+                }
+              >
+                {character.character}
+                {(key + 1) % asciiArt()!.width == 0 ? <br /> : undefined}
+              </span>
+            ))}
+          </code>
+        ) : (
+          asciiArt()?.characters.map((character) => (
+            <div
+              style={{
+                "background-color": `rgba(${character.r}, ${character.g}, ${
+                  character.b
+                }, ${character.a / 255})`,
+                "aspect-ratio": 1,
+              }}
+            ></div>
+          ))
+        )}
+      </pre>
+
       <form onSubmit={(e) => handleSubmit(e)} class="flex flex-col">
         <label>
           Image
@@ -98,12 +148,14 @@ export default function Converter() {
 
         <details>
           <summary>Extra</summary>
+
           <label>
             Font aspect ratio
             <input
               type="number"
               value={fontRatio()}
               onChange={(e) => setFontRatio(Number(e.target.value))}
+              disabled={pixels()}
               min="0.2"
               max="3"
               step="0.01"
@@ -112,6 +164,7 @@ export default function Converter() {
               type="range"
               value={fontRatio()}
               onChange={(e) => setFontRatio(Number(e.target.value))}
+              disabled={pixels()}
               min="0.2"
               max="3"
               step="0.01"
@@ -124,6 +177,7 @@ export default function Converter() {
               type="text"
               value={asciiString()}
               onChange={(e) => setAsciiString(e.target.value)}
+              disabled={pixels()}
               required
             />
           </label>
@@ -132,6 +186,7 @@ export default function Converter() {
             <input
               type="checkbox"
               onChange={() => setReverse((reverse) => !reverse)}
+              disabled={pixels()}
             />
             Reverse ASCII string
           </label>
@@ -140,8 +195,17 @@ export default function Converter() {
             <input
               type="checkbox"
               onChange={() => setColored((colored) => !colored)}
+              disabled={pixels()}
             />
             Colored
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              onChange={() => setPixels((pixels) => !pixels)}
+            />
+            Pixels
           </label>
         </details>
 
@@ -149,27 +213,6 @@ export default function Converter() {
           Convert
         </button>
       </form>
-
-      <pre>
-        <code>
-          {asciiArt()?.characters.map((character, key) => (
-            <span
-              style={
-                colored()
-                  ? {
-                      color: `rgba(${character.r}, ${character.g}, ${
-                        character.b
-                      }, ${character.a / 255})`,
-                    }
-                  : undefined
-              }
-            >
-              {character.character}
-              {(key + 1) % asciiArt()!.width == 0 ? <br /> : undefined}
-            </span>
-          ))}
-        </code>
-      </pre>
     </article>
   );
 }
