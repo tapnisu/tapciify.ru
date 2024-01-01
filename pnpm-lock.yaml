@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@picocss/pico':
-    specifier: ^1.5.10
-    version: 1.5.10
+    specifier: ^1.5.11
+    version: 1.5.11
   solid-icons:
     specifier: ^1.1.0
     version: 1.1.0(solid-js@1.8.7)
@@ -1568,8 +1568,8 @@ packages:
       fastq: 1.15.0
     dev: true
 
-  /@picocss/pico@1.5.10:
-    resolution: {integrity: sha512-+LafMsrwPxXQMk6sI///TmSInCwwZmq+K7SikyL3N/4GhhwzyPC+TQLUEqmrLyjluR+uIpFFcqjty30Rtr6GxQ==}
+  /@picocss/pico@1.5.11:
+    resolution: {integrity: sha512-cDaFiSyNPtuSTwSQt/05xsw8+g2ek4/S58tgh9Nc7miJCCdUrY9PAyl4OPWRJtYgJDdEvkUA9GuGj0J4nDP4Cw==}
     dev: false
 
   /@rollup/plugin-babel@5.3.1(@babel/core@7.23.5)(rollup@2.79.1):

@@ -10,7 +10,7 @@
     "generate-pwa-assets": "pwa-assets-generator"
   },
   "dependencies": {
-    "@picocss/pico": "^1.5.10",
+    "@picocss/pico": "^1.5.11",
     "solid-icons": "^1.1.0",
     "solid-js": "^1.8.7"
   },
