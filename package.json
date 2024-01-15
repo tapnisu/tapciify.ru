@@ -12,7 +12,7 @@
   "dependencies": {
     "@picocss/pico": "^1.5.11",
     "solid-icons": "^1.1.0",
-    "solid-js": "^1.8.10"
+    "solid-js": "^1.8.11"
   },
   "devDependencies": {
     "@vite-pwa/assets-generator": "^0.2.2",
