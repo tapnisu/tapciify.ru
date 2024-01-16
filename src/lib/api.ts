@@ -39,7 +39,7 @@ export class TapciifyApi {
     height = 0,
     asciiString = " .,:;+*?%S#@",
     fontRatio = 0.36,
-    reverse = false
+    reverse = false,
   ): Promise<ConvertResult> {
     const formData = new FormData();
     formData.append("blob", file, "img");
@@ -48,12 +48,12 @@ export class TapciifyApi {
       `${
         this.baseUrl
       }/convert?width=${width}&height=${height}&fontRatio=${fontRatio}&asciiString=${encodeURIComponent(
-        asciiString
+        asciiString,
       )}&reverse=${reverse}`,
       {
         method: "POST",
         body: formData,
-      }
+      },
     );
 
     return await req.json();
@@ -65,7 +65,7 @@ export class TapciifyApi {
     height = 0,
     asciiString = " .,:;+*?%S#@",
     fontRatio = 0.36,
-    reverse = false
+    reverse = false,
   ): Promise<RawConvertResult> {
     const formData = new FormData();
     formData.append("blob", file, "img");
@@ -74,12 +74,12 @@ export class TapciifyApi {
       `${
         this.baseUrl
       }/convert/raw?width=${width}&height=${height}&fontRatio=${fontRatio}&asciiString=${encodeURIComponent(
-        asciiString
+        asciiString,
       )}&reverse=${reverse}`,
       {
         method: "POST",
         body: formData,
-      }
+      },
     );
 
     return await req.json();

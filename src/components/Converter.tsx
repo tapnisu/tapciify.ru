@@ -26,7 +26,7 @@ export default function Converter() {
     } & {
       currentTarget: HTMLFormElement;
       target: Element;
-    }
+    },
   ) {
     event.preventDefault();
 
@@ -45,7 +45,7 @@ export default function Converter() {
         height(),
         pixels() ? "█" : asciiString(),
         pixels() ? 1 : fontRatio(),
-        pixels() ? false : reverse()
+        pixels() ? false : reverse(),
       )
       .catch((err) => console.error(err));
 
