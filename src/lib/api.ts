@@ -1,7 +1,7 @@
 export interface AsciiArt {
   asciiArt: string;
   width: number;
-  heigth: number;
+  height: number;
 }
 
 export interface ConvertResult {
@@ -19,7 +19,7 @@ export interface AsciiCharacter {
 export interface RawAsciiArt {
   characters: AsciiCharacter[];
   width: number;
-  heigth: number;
+  height: number;
 }
 
 export interface RawConvertResult {
