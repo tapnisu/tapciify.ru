@@ -17,8 +17,8 @@ dependencies:
 
 devDependencies:
   '@vite-pwa/assets-generator':
-    specifier: ^0.2.3
-    version: 0.2.3
+    specifier: ^0.2.4
+    version: 0.2.4
   prettier:
     specifier: ^3.2.5
     version: 3.2.5
@@ -1736,8 +1736,8 @@ packages:
     resolution: {integrity: sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==}
     dev: true
 
-  /@vite-pwa/assets-generator@0.2.3:
-    resolution: {integrity: sha512-tfCQamgaIv13bPUQ/tLkzXz2PqxgjYbJdQ/yTPEw9SF/pYGEvSy6pR0ABIsAIeRaOlhoiHnX77CtGcfEeGKIiw==}
+  /@vite-pwa/assets-generator@0.2.4:
+    resolution: {integrity: sha512-DXyPLPR/IpbZPSpo1amZEPghY/ziIwpTUKNaz0v1xG+ELzCXmrVQhVzEMqr2JLSqRxjc+UzKfGJA/YdUuaao3w==}
     engines: {node: '>=16.14.0'}
     hasBin: true
     dependencies:
