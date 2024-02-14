@@ -39,7 +39,7 @@ export class TapciifyApi {
     height = 0,
     asciiString = " .,:;+*?%S#@",
     fontRatio = 0.36,
-    reverse = false,
+    reverse = false
   ): Promise<ConvertResult> {
     const formData = new FormData();
     formData.append("blob", file, "img");
@@ -48,12 +48,12 @@ export class TapciifyApi {
       `${
         this.baseUrl
       }/convert?width=${width}&height=${height}&fontRatio=${fontRatio}&asciiString=${encodeURIComponent(
-        asciiString,
+        asciiString
       )}&reverse=${reverse}`,
       {
         method: "POST",
         body: formData,
-      },
+      }
     );
 
     return await req.json();
@@ -61,26 +61,26 @@ export class TapciifyApi {
 
   async convertRaw(
     file: File,
-    width = 0,
-    height = 0,
+    width: number,
+    height: number,
     asciiString = " .,:;+*?%S#@",
     fontRatio = 0.36,
-    reverse = false,
+    reverse = false
   ): Promise<RawConvertResult> {
     const formData = new FormData();
     formData.append("blob", file, "img");
 
-    const req = await fetch(
-      `${
-        this.baseUrl
-      }/convert/raw?width=${width}&height=${height}&fontRatio=${fontRatio}&asciiString=${encodeURIComponent(
-        asciiString,
-      )}&reverse=${reverse}`,
-      {
-        method: "POST",
-        body: formData,
-      },
-    );
+    let path = `${this.baseUrl}/convert/raw?asciiString=${encodeURIComponent(
+      asciiString
+    )}&fontRatio=${fontRatio}&reverse=${reverse}`;
+
+    if (width) path += `&width=${width}`;
+    if (height) path += `&height=${height}`;
+
+    const req = await fetch(path, {
+      method: "POST",
+      body: formData,
+    });
 
     return await req.json();
   }
