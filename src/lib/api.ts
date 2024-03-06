@@ -38,32 +38,6 @@ export class TapciifyApi {
     this.baseUrl = baseUrl;
   }
 
-  async convert(
-    file: File,
-    width = 0,
-    height = 0,
-    asciiString = " .,:;+*?%S#@",
-    fontRatio = 0.36,
-    reverse = false
-  ): Promise<ConvertResult> {
-    const formData = new FormData();
-    formData.append("blob", file, "img");
-
-    const req = await fetch(
-      `${
-        this.baseUrl
-      }/convert?width=${width}&height=${height}&fontRatio=${fontRatio}&asciiString=${encodeURIComponent(
-        asciiString
-      )}&reverse=${reverse}`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
-
-    return await req.json();
-  }
-
   async convertRaw(
     file: File,
     width: number,
