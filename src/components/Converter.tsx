@@ -1,5 +1,10 @@
 import { createSignal } from "solid-js";
-import { RawAsciiArt, TapciifyApi } from "../lib/api";
+import {
+  APIError,
+  RawAsciiArt,
+  RawConvertResult,
+  TapciifyApi,
+} from "../lib/api";
 
 const tapciifyApi = new TapciifyApi();
 
@@ -26,7 +31,7 @@ export default function Converter() {
     } & {
       currentTarget: HTMLFormElement;
       target: Element;
-    },
+    }
   ) {
     event.preventDefault();
 
@@ -45,13 +50,16 @@ export default function Converter() {
         height(),
         pixels() ? "█" : asciiString(),
         pixels() ? 1 : fontRatio(),
-        pixels() ? false : reverse(),
+        pixels() ? false : reverse()
       )
-      .catch((err) => console.error(err));
+      .catch((err) => alert(err));
 
     setBusy(false);
-    if (!res) return alert("Unknown error happened!");
-    setAsciiArt(res.data[0]);
+
+    if (!res || (res as APIError).status)
+      return alert((res as APIError).message);
+
+    setAsciiArt((res as RawConvertResult).data[0]);
   }
 
   return (

@@ -26,6 +26,11 @@ export interface RawConvertResult {
   data: RawAsciiArt[];
 }
 
+export interface APIError {
+  status: number;
+  message: string;
+}
+
 export class TapciifyApi {
   baseUrl: string;
 
@@ -66,7 +71,7 @@ export class TapciifyApi {
     asciiString = " .,:;+*?%S#@",
     fontRatio = 0.36,
     reverse = false
-  ): Promise<RawConvertResult> {
+  ): Promise<RawConvertResult | APIError> {
     const formData = new FormData();
     formData.append("blob", file, "img");
 
@@ -81,6 +86,12 @@ export class TapciifyApi {
       method: "POST",
       body: formData,
     });
+
+    if (!req.ok)
+      return {
+        status: req.status,
+        message: await req.text(),
+      };
 
     return await req.json();
   }
