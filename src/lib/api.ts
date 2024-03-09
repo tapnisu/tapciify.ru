@@ -1,13 +1,3 @@
-export interface AsciiArt {
-  asciiArt: string;
-  width: number;
-  height: number;
-}
-
-export interface ConvertResult {
-  data: AsciiArt[];
-}
-
 export interface AsciiCharacter {
   character: string;
   r: number;
