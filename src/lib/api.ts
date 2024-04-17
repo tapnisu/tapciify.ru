@@ -24,7 +24,7 @@ export interface APIError {
 export class TapciifyApi {
   baseUrl: string;
 
-  constructor(baseUrl = "https://api.tapciify.ru/api/v1") {
+  constructor(baseUrl = "https://api.tapciify.ru/v1") {
     this.baseUrl = baseUrl;
   }
 
