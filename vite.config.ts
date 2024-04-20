@@ -9,6 +9,7 @@ export default defineConfig({
       manifest: {
         name: "Tapciify web",
         short_name: "Tapciify",
+        theme_color: "#047878",
         icons: [
           {
             src: "pwa-64x64.png",
