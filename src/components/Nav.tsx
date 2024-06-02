@@ -17,7 +17,7 @@ export default function Nav() {
       </ul>
       <ul>
         <li>
-          <a href="https://github.com/tapciify/api" class="secondary">
+          <a href="https://api.tapciify.ru/" class="secondary">
             Api
           </a>
         </li>
