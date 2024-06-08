@@ -6,8 +6,8 @@ WORKDIR /app
 RUN corepack enable
 RUN corepack install
 
-RUN pnpm run build
 RUN pnpm install --prod --frozen-lockfile
+RUN pnpm run build
 
 FROM nginx:1.27-alpine
 
