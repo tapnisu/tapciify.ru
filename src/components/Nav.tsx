@@ -5,7 +5,7 @@ export default function Nav() {
     <nav>
       <ul>
         <li>
-          <a href="https://github.com/tapciify/tapciify.ru" class="secondary">
+          <a href="https://github.com/tapnisu/tapciify.ru" class="secondary">
             <FaBrandsGithub />
           </a>
         </li>
