@@ -1,7 +1,11 @@
 FROM node:20-alpine3.20 as build
+LABEL authors="tapnisu"
 
 COPY . /app
 WORKDIR /app
+
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
 
 RUN corepack enable
 RUN corepack install
