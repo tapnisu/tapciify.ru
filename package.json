@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@vite-pwa/assets-generator": "^0.2.4",
-    "prettier": "^3.3.2",
+    "prettier": "^3.3.3",
     "typescript": "^5.5.3",
     "vite": "^5.3.3",
     "vite-plugin-pwa": "^0.20.0",
