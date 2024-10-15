@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js";
+import { createSignal, JSX } from "solid-js";
 import {
   APIError,
   RawAsciiArt,
@@ -26,14 +26,10 @@ export default function Converter() {
   const [busy, setBusy] = createSignal(false);
   const [errorMessage, setErrorMessage] = createSignal<string | null>(null);
 
-  async function handleSubmit(
-    event: Event & {
-      submitter: HTMLElement;
-    } & {
-      currentTarget: HTMLFormElement;
-      target: Element;
-    }
-  ) {
+  const handleSubmit: JSX.EventHandlerUnion<
+    HTMLFormElement,
+    SubmitEvent
+  > = async (event) => {
     event.preventDefault();
 
     const fileL = file();
@@ -61,7 +57,7 @@ export default function Converter() {
       return setErrorMessage((res as APIError).message);
 
     setAsciiArt((res as RawConvertResult).data[0]);
-  }
+  };
 
   return (
     <>
