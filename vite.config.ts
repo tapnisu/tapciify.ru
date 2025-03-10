@@ -6,6 +6,16 @@ export default defineConfig({
   plugins: [
     solid(),
     VitePWA({
+      registerType: "autoUpdate",
+      includeAssets: [
+        "favicon.ico",
+        "apple-touch-icon-180x180.png",
+        "maskable-icon-512x512.png",
+        "og.webp",
+        "pwa-192x192.png",
+        "pwa-512x512.png",
+        "pwa-64x64.png",
+      ],
       manifest: {
         name: "Tapciify web",
         short_name: "Tapciify",
